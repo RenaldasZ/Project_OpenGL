@@ -18,7 +18,6 @@ class Test(Base):
         """
 
         fsCode = """
-        out vec4 fragColor;
         void main()
         {
             gl_FragColor = vec4(0.0, 1.0, 1.0, 1.0);
@@ -29,6 +28,7 @@ class Test(Base):
 
         # render settings
         glPointSize(16)
+        glLineWidth(8)
 
         # set up VAOs (vertex array objects)
         vaoRef = glGenVertexArrays(1)
@@ -50,7 +50,7 @@ class Test(Base):
     def update(self):
 
         glUseProgram(self.programRef)
-        glDrawArrays(GL_POINTS, 0, self.vertexCount)
+        glDrawArrays(GL_TRIANGLE_FAN, 0, self.vertexCount)
 
 # create instance and run
 Test().run()

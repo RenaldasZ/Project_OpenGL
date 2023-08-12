@@ -3,7 +3,7 @@ from core.openGLUtils import OpenGLUtils
 from core.attribute import Attribute
 from OpenGL.GL import *
 
-# render six points in a hexagon arrangement
+# render six points in a hexagon arrangement; use vertex colors
 class Test(Base):
 
     def initialize(self):
@@ -11,17 +11,20 @@ class Test(Base):
 
         vsCode = """
         in vec3 position;
+        in vec3 vertexColor;
+        out vec3 color;
         void main()
         {
             gl_Position = vec4(position.x, position.y, position.z, 1.0);
+            color = vertexColor;
         }
         """
 
         fsCode = """
-        out vec4 fragColor;
+        in vec3 color;
         void main()
         {
-            gl_FragColor = vec4(0.0, 1.0, 1.0, 1.0);
+            gl_FragColor = vec4(color.r, color.g, color.b, 1.0);
         }
         """
 
@@ -46,12 +49,22 @@ class Test(Base):
         positionAttribute = Attribute("vec3", positionData)
         positionAttribute.associateVariable(self.programRef, "position")
 
+        colorData = [[1.0, 0.0, 0.0],
+                     [1.0, 0.5, 0.0],
+                     [1.0, 1.0, 0.0],
+                     [0.0, 1.0, 0.0],
+                     [0.0, 0.0, 1.0],
+                     [0.5, 0.0, 1.0]]
+        
+        colorAttribute = Attribute("vec3", colorData)
+        colorAttribute.associateVariable(self.programRef, "vertexColor")
+
         self.vertexCount = len(positionData)
 
     def update(self):
 
         glUseProgram(self.programRef)
-        glDrawArrays(GL_TRIANGLE_FAN, 0, self.vertexCount)
+        glDrawArrays(GL_LINES, 0, self.vertexCount)
 
 # create instance and run
 Test().run()
