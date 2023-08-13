@@ -22,9 +22,10 @@ class Test(Base):
 
         fsCode = """
         in vec3 color;
+        out vec4 fragColor;
         void main()
         {
-            gl_FragColor = vec4(color.r, color.g, color.b, 1.0);
+            fragColor = vec4(color.r, color.g, color.b, 1.0);
         }
         """
 

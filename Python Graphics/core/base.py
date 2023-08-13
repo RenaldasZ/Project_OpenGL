@@ -15,6 +15,11 @@ class Base(object):
         # indicate rendering options
         displayFlags = pygame.DOUBLEBUF | pygame.OPENGL
 
+        # use a core OpenGL profile for cross-platform compatibility;
+        #  requires pygame >= 2.0.0
+        pygame.display.gl_set_attribute(pygame.GL_CONTEXT_PROFILE_MASK, 
+                                        pygame.GL_CONTEXT_PROFILE_CORE)
+
         # create and display the window
         self.screen = pygame.display.set_mode(screenSize, displayFlags)
 

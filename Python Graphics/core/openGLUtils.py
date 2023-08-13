@@ -9,8 +9,7 @@ class OpenGLUtils(object):
     def initializeShader(shaderCode, shaderType):
 
         # specify OpenGL version and requirements
-        extension = "#extension GL_ARB_shading_language_420pack: require \n"
-        shaderCode = "#version 130 \n" + extension + shaderCode
+        shaderCode = "#version 330 \n" + shaderCode
 
         # create empty shader object and return reference value
         shaderRef = GL.glCreateShader(shaderType)
