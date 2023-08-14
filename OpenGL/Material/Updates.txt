@@ -1,0 +1,3 @@
+* using Pygame 2.0.0, configuring a core profile for OpenGL, and using #version 330
+* switching fragment shaders to use out vec4 fragColor instead of gl_FragColor
+* always creating vertex array objects (VAOs)
